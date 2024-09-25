@@ -39,7 +39,7 @@ var ip = record?.Address;
 * Multiple DNS endpoints can be configured. DnsClient will use them in random or sequential order (configurable), with re-tries.
 * Configurable retry of queries
 * Optional audit trail of each response and exception
-* Configurable error handling. Throwing DNS errors, like `NotExistentDomain` is turned off by default
+* Configurable error handling. Throwing DNS errors, like `NoneExistentDomain` is turned off by default
 * Optional Trace/Logging
 
 ### Supported resource records

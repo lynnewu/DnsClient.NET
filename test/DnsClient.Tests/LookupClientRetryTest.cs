@@ -194,7 +194,7 @@ namespace DnsClient.Tests
             var calledIps = new List<IPAddress>();
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
-                var status = DnsHeaderResponseCode.NotExistentDomain;
+                var status = DnsHeaderResponseCode.NoneExistentDomain;
 
                 // response from ip1 & 2 should be retried with same server.
                 if (ip.Address == ip1)
@@ -215,7 +215,7 @@ namespace DnsClient.Tests
 
             // no exception but error in the response after calling all endpoints!
             Assert.True(result.HasError);
-            Assert.Equal(DnsHeaderResponseCode.NotExistentDomain, result.Header.ResponseCode);
+            Assert.Equal(DnsHeaderResponseCode.NoneExistentDomain, result.Header.ResponseCode);
 
             // 1x 1 try, 2x 4 tries
             Assert.Equal(9, calledIps.Count);
@@ -243,7 +243,7 @@ namespace DnsClient.Tests
             var calledIps = new List<IPAddress>();
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
-                var status = DnsHeaderResponseCode.NotExistentDomain;
+                var status = DnsHeaderResponseCode.NoneExistentDomain;
 
                 // response from ip1 & 2 should be retried with same server.
                 if (ip.Address == ip1)
@@ -264,7 +264,7 @@ namespace DnsClient.Tests
 
             // no exception but error in the response after calling all 3 endpoints!
             Assert.True(result.HasError);
-            Assert.Equal(DnsHeaderResponseCode.NotExistentDomain, result.Header.ResponseCode);
+            Assert.Equal(DnsHeaderResponseCode.NoneExistentDomain, result.Header.ResponseCode);
 
             // 1x 1 try, 2x 4 tries
             Assert.Equal(9, calledIps.Count);
@@ -292,7 +292,7 @@ namespace DnsClient.Tests
             var calledIps = new List<IPAddress>();
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
-                var status = DnsHeaderResponseCode.NotExistentDomain;
+                var status = DnsHeaderResponseCode.NoneExistentDomain;
 
                 // response from ip1 & 2 should be retried with same server.
                 if (ip.Address == ip1)
@@ -315,7 +315,7 @@ namespace DnsClient.Tests
             var result = Assert.ThrowsAny<DnsResponseException>(() => lookup.Query(request));
 
             // ensure the error is the one from the last call
-            Assert.Equal(DnsResponseCode.NotExistentDomain, result.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, result.Code);
 
             Assert.Equal(9, calledIps.Count);
         }
@@ -342,7 +342,7 @@ namespace DnsClient.Tests
             var calledIps = new List<IPAddress>();
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
-                var status = DnsHeaderResponseCode.NotExistentDomain;
+                var status = DnsHeaderResponseCode.NoneExistentDomain;
 
                 // response from ip1 & 2 should be retried with same server.
                 if (ip.Address == ip1)
@@ -363,7 +363,7 @@ namespace DnsClient.Tests
             var result = await Assert.ThrowsAnyAsync<DnsResponseException>(() => lookup.QueryAsync(request));
 
             // ensure the error is the one from the last call
-            Assert.Equal(DnsResponseCode.NotExistentDomain, result.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, result.Code);
 
             Assert.Equal(9, calledIps.Count);
         }
@@ -389,14 +389,14 @@ namespace DnsClient.Tests
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
                 calledIps.Add(ip.Address);
-                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NotExistentDomain, 0, 0, 0, 0), 0);
+                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NoneExistentDomain, 0, 0, 0, 0), 0);
             });
 
             var lookup = new LookupClient(options, messageHandler, TestMessageHandler.Tcp);
             var result = lookup.Query(new DnsQuestion("test.com", QueryType.A, QueryClass.IN));
 
             Assert.True(result.HasError);
-            Assert.Equal(DnsHeaderResponseCode.NotExistentDomain, result.Header.ResponseCode);
+            Assert.Equal(DnsHeaderResponseCode.NoneExistentDomain, result.Header.ResponseCode);
 
             // ensure we got the error right from the first server call
             Assert.Single(calledIps);
@@ -423,14 +423,14 @@ namespace DnsClient.Tests
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
                 calledIps.Add(ip.Address);
-                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NotExistentDomain, 0, 0, 0, 0), 0);
+                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NoneExistentDomain, 0, 0, 0, 0), 0);
             });
 
             var lookup = new LookupClient(options, messageHandler, TestMessageHandler.Tcp);
             var result = await lookup.QueryAsync(new DnsQuestion("test.com", QueryType.A, QueryClass.IN));
 
             Assert.True(result.HasError);
-            Assert.Equal(DnsHeaderResponseCode.NotExistentDomain, result.Header.ResponseCode);
+            Assert.Equal(DnsHeaderResponseCode.NoneExistentDomain, result.Header.ResponseCode);
 
             // ensure we got the error right from the first server call
             Assert.Single(calledIps);
@@ -457,14 +457,14 @@ namespace DnsClient.Tests
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
                 calledIps.Add(ip.Address);
-                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NotExistentDomain, 0, 0, 0, 0), 0);
+                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NoneExistentDomain, 0, 0, 0, 0), 0);
             });
 
             var lookup = new LookupClient(options, messageHandler, TestMessageHandler.Tcp);
             var request = new DnsQuestion("test.com", QueryType.A, QueryClass.IN);
             var result = Assert.ThrowsAny<DnsResponseException>(() => lookup.Query(request));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, result.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, result.Code);
 
             Assert.Single(calledIps);
         }
@@ -490,14 +490,14 @@ namespace DnsClient.Tests
             var messageHandler = new TestMessageHandler(DnsMessageHandleType.UDP, (ip, req) =>
             {
                 calledIps.Add(ip.Address);
-                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NotExistentDomain, 0, 0, 0, 0), 0);
+                return new DnsResponseMessage(new DnsResponseHeader(req.Header.Id, (int)DnsHeaderResponseCode.NoneExistentDomain, 0, 0, 0, 0), 0);
             });
 
             var lookup = new LookupClient(options, messageHandler, TestMessageHandler.Tcp);
             var request = new DnsQuestion("test.com", QueryType.A, QueryClass.IN);
             var result = await Assert.ThrowsAnyAsync<DnsResponseException>(() => lookup.QueryAsync(request));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, result.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, result.Code);
             Assert.Single(calledIps);
         }
 
@@ -680,7 +680,7 @@ namespace DnsClient.Tests
                 // response from ip1 & 2 should be retried with same server.
                 if (ip.Address == ip1)
                 {
-                    status = DnsHeaderResponseCode.NotExistentDomain;
+                    status = DnsHeaderResponseCode.NoneExistentDomain;
                 }
                 if (ip.Address == ip2)
                 {

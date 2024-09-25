@@ -400,7 +400,7 @@ namespace DnsClient.Tests
 
             var ex = await Assert.ThrowsAnyAsync<DnsResponseException>(() => client.QueryAsync("lalacom", (QueryType)12345));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, ex.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, ex.Code);
         }
 
         [Fact]
@@ -414,7 +414,7 @@ namespace DnsClient.Tests
 
             var ex = Assert.ThrowsAny<DnsResponseException>(() => client.Query("lalacom", (QueryType)12345));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, ex.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, ex.Code);
         }
 
         public class QueryTimesOutTests
@@ -928,7 +928,7 @@ namespace DnsClient.Tests
 
             var ex = Assert.ThrowsAny<DnsResponseException>(() => client.GetHostEntry("lolhost"));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, ex.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, ex.Code);
         }
 
         [Fact]
@@ -952,7 +952,7 @@ namespace DnsClient.Tests
 
             var ex = Assert.ThrowsAny<DnsResponseException>(() => client.GetHostEntry("1.0.0.0"));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, ex.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, ex.Code);
         }
 
         [Fact]
@@ -1029,7 +1029,7 @@ namespace DnsClient.Tests
 
             var ex = await Assert.ThrowsAnyAsync<DnsResponseException>(() => client.GetHostEntryAsync("lolhost"));
 
-            Assert.Equal(DnsResponseCode.NotExistentDomain, ex.Code);
+            Assert.Equal(DnsResponseCode.NoneExistentDomain, ex.Code);
         }
 
         [Fact]

@@ -216,7 +216,7 @@ namespace DnsClient.Tests
         public void Cache_DoesNotCacheFailureIfDisabled()
         {
             var cache = new ResponseCache(true);
-            var failureStatus = DnsResponseCode.NotExistentDomain;
+            var failureStatus = DnsResponseCode.NoneExistentDomain;
             var response = new DnsResponseMessage(new DnsResponseHeader(1, (ushort)failureStatus, 0, 0, 0, 0), 0);
 
             cache.Add("key", response.AsQueryResponse(new NameServer(IPAddress.Any), null));
@@ -230,7 +230,7 @@ namespace DnsClient.Tests
         public void Cache_DoesCacheFailureIfEnabled()
         {
             var cache = new ResponseCache(true);
-            var failureStatus = DnsResponseCode.NotExistentDomain;
+            var failureStatus = DnsResponseCode.NoneExistentDomain;
             var response = new DnsResponseMessage(new DnsResponseHeader(1, (ushort)failureStatus, 0, 0, 0, 0), 0);
 
             cache.Add("key", response.AsQueryResponse(new NameServer(IPAddress.Any), null), true);
@@ -243,7 +243,7 @@ namespace DnsClient.Tests
         public async Task Cache_DoesCacheFailureExpire()
         {
             var cache = new ResponseCache(true, null, null, TimeSpan.FromMilliseconds(1));
-            var failureStatus = DnsResponseCode.NotExistentDomain;
+            var failureStatus = DnsResponseCode.NoneExistentDomain;
             var response = new DnsResponseMessage(new DnsResponseHeader(1, (ushort)failureStatus, 0, 0, 0, 0), 0);
 
             cache.Add("key", response.AsQueryResponse(new NameServer(IPAddress.Any), null), true);

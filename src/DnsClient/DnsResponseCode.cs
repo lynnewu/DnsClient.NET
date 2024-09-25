@@ -40,7 +40,7 @@ namespace DnsClient
         /// this code signifies that the domain name referenced in the query does not exist.
         /// </summary>
         /// <seealso href="https://tools.ietf.org/html/rfc1035">RFC 1035</seealso>
-        NotExistentDomain = 3,
+        NoneExistentDomain = 3,
 
         /// <summary>
         /// Not Implemented. The name server does not support the requested kind of query.
@@ -142,7 +142,7 @@ namespace DnsClient
         /// this code signifies that the domain name referenced in the query does not exist.
         /// </summary>
         /// <seealso href="https://tools.ietf.org/html/rfc1035">RFC 1035</seealso>
-        NotExistentDomain = 3,
+        NoneExistentDomain = 3,
 
         /// <summary>
         /// Not Implemented. The name server does not support the requested kind of query.
@@ -398,7 +398,7 @@ namespace DnsClient
             { DnsResponseCode.NoError, NoError },
             { DnsResponseCode.FormatError, FormErr },
             { DnsResponseCode.ServerFailure, ServFail },
-            { DnsResponseCode.NotExistentDomain, NXDomain },
+            { DnsResponseCode.NoneExistentDomain, NXDomain },
             { DnsResponseCode.NotImplemented, NotImp },
             { DnsResponseCode.Refused, Refused },
             { DnsResponseCode.ExistingDomain, YXDomain },
